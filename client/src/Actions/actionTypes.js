@@ -1,0 +1,9 @@
+export const GET_RECIPES = "GET_RECIPES";
+export const GET_DIETS = "GET_DIETS";
+export const RECIPE_BY_NAME = "RECIPE_BY_NAME";
+export const RECIPE_BY_ID = "RECIPE_BY_ID";
+export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
+export const FILTER_CREATED = "FILTER_CREATED";
+export const ORDER_BY_NAME = "ORDER_BY_NAME";
+export const ORDER_BY_HEALTH_SCORE = "ORDER_BY_HEALTH_SCORE";
+export const POST_RECIPE = "POST_RECIPE";

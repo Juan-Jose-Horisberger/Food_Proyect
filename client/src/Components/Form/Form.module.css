@@ -1,0 +1,12 @@
+.danger {
+    color: red;
+    font-size: 15px;
+}
+
+.inputError {
+    border: 2px solid red;
+}
+
+.inputRight {
+    border: 2px solid green;
+}
