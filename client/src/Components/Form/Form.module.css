@@ -1,6 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap');
+/*font-family: 'Signika Negative', sans-serif;*/
+
+body {
+    line-height: 1.4rem;
+}
+
+.containerRecipeCreate {
+    width: 100%;
+    height: auto;
+    /* display: flex; */
+    overflow: hidden;
+}
+
+.containerForm {
+    z-index: 1;
+    position: absolute;
+    /* background-color: #492f21; */
+    background-color: rgba(90, 88, 87, 0.7);
+    /* opacity: 0.8; */
+    border-radius: 10px;
+}
+
 .danger {
     color: red;
-    font-size: 15px;
+    font-size: 18px;
+    font-family: 'Signika Negative', sans-serif;
 }
 
 .inputError {
@@ -10,3 +34,60 @@
 .inputRight {
     border: 2px solid green;
 }
+
+.typography {
+    font-family: 'Signika Negative', sans-serif;
+}
+
+.containerRanger {
+    border-radius: 5px;
+    background-color: #121212;
+    opacity: 1;
+}
+
+.containerImage {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+}
+
+.textJustify {
+    text-align: justify;
+}
+
+.backgroundDiet {
+    background-color: rgb(112, 112, 112);
+    border-radius: 10px;
+}
+
+.backgroudSteps {
+    background-color: rgb(112, 112, 112);
+    border-radius: 10px;
+}
+
+.backgroudNewSteps {
+    background-color: rgb(37, 37, 37);
+    border-radius: 10px;
+}
+
+.buttonsImage {
+    width: 70px;
+}
+
+@media screen and (min-width: 576px) {
+    .buttonsImage {
+        width: 50px;
+    }
+}
+
+
+@media screen and (min-width: 50px) {
+    .display {
+        display: none; 
+    }
+}
+
+/*${styles.buttonHome}, con nav-link logramos esto*/
+/* .buttonHome{
+    text-decoration: none !important;
+} */

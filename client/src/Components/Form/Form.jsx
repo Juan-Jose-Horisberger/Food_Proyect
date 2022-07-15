@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { getDiets, getRecipes, postRecipes } from '../../Actions';
 import styles from "./Form.module.css";
+import imageFondo from '../../Imagenes/pexels-ella-olsson-1640773.jpg'
 
 let regExpUrl = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)/i; //URL image
 // --> /i verifica si se cumple la regular expression
@@ -51,8 +52,8 @@ export default function CreateRecipe() {
             setErrorsExist(false);
         }
 
-        if(e.target.name === 'steps'){
-            if(e.target.value === ''){
+        if (e.target.name === 'steps') {
+            if (e.target.value === '') {
                 setButtonStep(true)
             }
             else {
@@ -322,149 +323,213 @@ export default function CreateRecipe() {
     })
 
     return (
-        <div>
-            <div>
-                <h1>Create you recipe!</h1>
-                <Link to='/home'>
-                    <button>Home</button>
-                </Link>
-            </div>
-            <form onSubmit={(e) => handleSubmit(e)}>
-                <div>
-                    <div>
-                        <label>Title</label>
-                        <input
-                            type="text"
-                            name="name"
-                            defaultValue={input.name}
-                            placeholder='Title...'
-                            autoComplete='off'
-                            className={error.name && styles.inputError}
-                            onChange={handleChange}
-                        />
-                        {
-                            error.name && <p className={styles.danger}>{error.name}</p>
-                        }
+        <div className={`d-flex justify-content-center ${styles.containerRecipeCreate}`}>
+            <img src={imageFondo} alt="" className={`${styles.imageRecipe}`} />
+            <div className={`container col-8 my-5 py-3 py-md-5 ${styles.containerForm}`}>
+                <div className='row col-12 m-0 mb-4 d-flex justify-content-center flex-sm-row'>
+                    <div className='col-12 col-sm-6'>
+                        <h1 >Create you recipe!</h1>
                     </div>
-                    <div>
-                        <label>Description</label>
-                        <input
-                            type="text"
-                            name="summary"
-                            defaultValue={input.summary}
-                            maxLength="254"
-                            placeholder='Description...'
-                            autoComplete='off'
-                            className={error.summary && styles.inputError}
-                            onChange={handleChange}
-                        />
-                        {
-                            error.summary && <p className={styles.danger}>{error.summary}</p>
-                        }
+                    <div className='col-12 col-sm-6 d-flex justify-content-center'>
+                        <Link to='/home' className={`d-flex align-items-center nav-link`}>
+                            <button className={`btn btn-success px-3`}>Home</button>
+                        </Link>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label>Health Score</label>
-                        <div>
-                            <input
-                                type="range"
-                                min="0"
-                                max="100"
-                                defaultValue={input.healthScore}
-                                name="healthScore"
-                                onChange={handleChange}
-                            />
-                            <p className={styles}>
-                                {input.healthScore}
-                            </p>
-                            {
-                                error.healthScore && <p className={styles.danger}>{error.healthScore}</p>
-                            }
-                        </div>
-                    </div>
-                    <div>
-                        <label>Image (optional)</label>
-                        <input
-                            type="text"
-                            value={inputImage.image}
-                            name="image"
-                            autoComplete='off'
-                            onChange={(e) => handleChangeImage(e)}
-                            disabled={showField}
-                            placeholder="image URL"
-                            maxLength="254"
-                        />
-                        <button onClick={(e) => addImage(e)} disabled={imageButton}>Add</button>
-                        <button onClick={(e) => deleteImg(e)} disabled={!image.length ? true : false} >X</button>
-                    </div>
-                    {
-                        errorImage.image && <p className={styles.danger}>{errorImage.image}</p>
-                    }
-                    {showImage && (<img src={image?.map(e => e.url)} alt="Image not found." />)}
-                    <div>
-                        <label>Diets</label>
-                        <div>
-                            {/* {console.log(input.diets)} */}
-                            {allDiets.map((d) => (
-                                <div key={d.id}>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            //name={d.name}
-                                            //value={d.name}
-                                            value={d.id}
-                                            onClick={(e) => handleCheck(e)}
-                                        />
-                                        {d.name.toUpperCase()}
-                                    </label>
+                <form onSubmit={(e) => handleSubmit(e)} className={`col-12`}>
+                    <div className='container-fluid d-flex flex-column'>
+                        <div className='col-12'>
+                            <div className='mb-4'>
+                                <label className={`form-label d-flex ps-1 fs-5 ${styles.typography}`}>Title</label>
+                                <div> {/*Div para manejar el tamaño de el input mediante col-*/}
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        defaultValue={input.name}
+                                        placeholder='Title...'
+                                        autoComplete='off'
+                                        className={`form-control ${styles.typography} ${error.name && styles.inputError}`}
+                                        onChange={handleChange}
+                                    />
                                 </div>
-                            ))}
+                            </div>
                             {
-                                input.diets.length === 0 && <p className={styles.danger}>{error.diets}</p>
+                                error.name && <p className={styles.danger}>{error.name}</p>
                             }
                         </div>
-                    </div>
-                    <div>
-                        <label>Steps</label>
-                        <div>
-                            <p>Create new step</p>
-                            <input
-                                type="text"
-                                value={input.steps} //Para limpiar el input es necesario que este el value
-                                //defaultValue={input.steps}
-                                autoComplete='off'
-                                name="steps"
-                                maxLength="254"
-                                placeholder='Add steps...'
-                                className={(error.steps && stepCounter === 0) ? styles.inputError : null} // : null, es porque tira un warning si no lo esta.
-                                onChange={(e) => handleChange(e)}
-                            />
-                            <button type='button' onClick={() => addStep()} disabled={buttonStep}>Add</button>
-                            <div>
+                        <div className='col-12'>
+                            <div className='mb-4'>
+                                <label className={`form-label d-flex ps-1 fs-5 ${styles.typography}`}>Description</label>
                                 <div>
-                                    {stepsList?.map((el) => (
-                                        <p key={el.number}>
-                                            <span>{el.number}. </span>
-                                            {el.description}
-                                            <button onClick={(e) => deleteStep(e, el.number)}>
-                                                X
-                                            </button>
-                                        </p>
-                                    ))}
+                                    <input
+                                        type="text"
+                                        name="summary"
+                                        defaultValue={input.summary}
+                                        maxLength="254"
+                                        placeholder='Description...'
+                                        autoComplete='off'
+                                        className={`form-control ${styles.typography} ${error.summary && styles.inputError}`}
+                                        onChange={handleChange}
+                                    />
                                 </div>
                                 {
-                                    stepsList.length === 0 && <p className={styles.danger}>{error.steps}</p>
+                                    error.summary && <p className={styles.danger}>{error.summary}</p>
                                 }
                             </div>
                         </div>
                     </div>
-                </div>
-                {/* {console.log(stepsList)} */}
-                <button type="submit" disabled={errorsExist}>
-                    Submit
-                </button>
-            </form>
+                    <div>
+                        <div className='container-fluid mb-4'>
+                            <div className='col-12'>
+                                <label className={`form-label d-flex ps-1 fs-5 ${styles.typography}`}>Health Score</label>
+                                <div className='col-12 m-0 d-flex flex-row'>
+                                    <div className={`col-10 col-sm-6 d-flex align-items-center px-2 p-2 ${styles.containerRanger}`}>
+                                        <input
+                                            type="range"
+                                            min="0"
+                                            max="100"
+                                            defaultValue={input.healthScore}
+                                            name="healthScore"
+                                            onChange={handleChange}
+                                            className={`form-range`}
+                                        />
+                                    </div>
+                                    <div className={`col-1 col-sm-6 d-flex align-items-center ms-2`}>
+                                        <p className={`fs-5 p-0 m-0 ${styles.typography}`}>
+                                            {input.healthScore}
+                                        </p>
+                                    </div>
+                                </div>
+                                {
+                                    error.healthScore && <p className={styles.danger}>{error.healthScore}</p>
+                                }
+                            </div>
+                        </div>
+                        <div className='container-fluid'>
+                            <div className='col-12 mb-4'>
+                                <label className={`form-label d-flex ps-1 fs-5 ${styles.typography}`}>Image (optional)</label>
+                                <div className='d-flex flex-column flex-sm-row'>
+                                    <div className={`col-12 col-sm-6 me-2`}>
+                                        <input
+                                            type="text"
+                                            value={inputImage.image}
+                                            name="image"
+                                            autoComplete='off'
+                                            onChange={(e) => handleChangeImage(e)}
+                                            disabled={showField}
+                                            placeholder="image URL"
+                                            maxLength="254"
+                                            className={`form-control ${styles.typography}`}
+                                        />
+                                    </div>
+                                    <div className='col-12 col-sm-5 pt-1 pt-sm-0 d-flex justify-content-evenly justify-content-sm-start'>
+                                        <button
+                                            className={`btn btn-success mx-sm-2 ${styles.buttonsImage}`}
+                                            type="button"
+                                            onClick={(e) => addImage(e)}
+                                            disabled={imageButton}>Add
+                                        </button>
+                                        <button
+                                            className={`btn btn-danger ${styles.buttonsImage}`}
+                                            type="button"
+                                            onClick={(e) => deleteImg(e)}
+                                            disabled={!image.length ? true : false}>X
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            {
+                                errorImage.image && <p className={styles.danger}>{errorImage.image}</p>
+                            }
+                            {showImage && (
+                                <div className={`d-flex mx-auto ${styles.containerImage}`}>
+                                    <img src={image?.map(e => e.url)} alt="Image not found." className='img-fluid' />
+                                </div>
+                            )}
+                        </div>
+                        <div className='container-fluid mb-3'>
+                            <label className={`form-label d-flex justify-content-center ps-1 fs-4 mb-3 ${styles.typography}`}>Diets</label>
+                            <div className='col-12 d-flex justify-content-center'>
+                                <div className={`row col-12 col-md-10 p-1 ${styles.backgroundDiet}`}>
+                                    {/* {console.log(input.diets)} */}
+                                    {allDiets.map((d) => (
+                                        <div key={d.id} className={`col-12 col-lg-6 d-flex mt-3 ${styles.textJustify}`}>
+                                            <label>
+                                                <input
+                                                    type="checkbox"
+                                                    //name={d.name}
+                                                    //value={d.name}
+                                                    className={`form-check-input me-2 fs-4 ${styles.typography}`}
+                                                    value={d.id}
+                                                    onClick={(e) => handleCheck(e)}
+                                                />
+                                                {`${d.name.toUpperCase()}`}
+                                            </label>
+                                        </div>
+                                    ))}
+                                    {
+                                        input.diets.length === 0 && <p className={styles.danger}>{error.diets}</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div className={`container-fluid`}>
+                            <label className={`form-label d-flex justify-content-center ps-1 fs-4 mb-3 ${styles.typography}`}>Steps</label>
+                            <div className={`col-12 p-4 d-flex flex-column flex-md-row ${styles.backgroudSteps}`}>
+                                <div className='col-12 col-md-3 d-flex flex-column justify-content-start mb-2'>
+                                    <p className={`d-flex col-8 col-md-12 fs-5 ${styles.typography} ${styles.display}`}>Create new step</p>
+                                    <div className='col-12 d-flex flex-md-column'>
+                                        <div className='col-7 me-1 m-md-0'>
+                                            <input
+                                                type="text"
+                                                value={input.steps} //Para limpiar el input es necesario que este el value
+                                                //defaultValue={input.steps}
+                                                autoComplete='off'
+                                                name="steps"
+                                                maxLength="254"
+                                                placeholder='Add steps...'
+                                                className={`form-control ${(error.steps && stepCounter === 0) ? styles.inputError : null}`} // : null, es porque tira un warning si no lo esta.
+                                                onChange={(e) => handleChange(e)}
+                                            />
+                                        </div>
+                                        <div>
+                                            <div className='col-12 d-flex mt-md-2 p-0 m-0 '>
+                                                <button
+                                                    type='button'
+                                                    onClick={() => addStep()}
+                                                    className={`btn btn-success`}
+                                                    disabled={buttonStep}>Add
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={`p-3 ps-sm-5 col d-flex ${styles.backgroudNewSteps}`}>
+                                    <div>
+                                        {stepsList?.map((el) => (
+                                            <p key={el.number} className={`${styles.typography}`}>
+                                                <span className='fs-5'>{el.number}. </span>
+                                                <span className='me-2'>{el.description}</span>
+                                                <button
+                                                    onClick={(e) => deleteStep(e, el.number)}
+                                                    className={`btn btn-danger p-2 py-0 ${styles.closeButton}`}>X
+                                                </button>
+                                            </p>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                            {
+                                stepsList.length === 0 && <p className={styles.danger}>{error.steps}</p>
+                            }
+                        </div>
+                    </div>
+                    {/* {console.log(stepsList)} */}
+                    <button type="submit" disabled={errorsExist} className={`btn btn-primary mt-3`}>
+                        Submit
+                    </button>
+                </form>
+            </div>
             <br />
             <br />
             <br />

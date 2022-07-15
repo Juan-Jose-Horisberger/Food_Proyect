@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+/*font-family: 'Rubik', sans-serif;*/
+
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap');
+/*font-family: 'PT Sans Narrow', sans-serif;*/
+
+.titleDetail{
+    font-size: 30px;
+    font-family: 'Rubik', sans-serif;
+}
+
+.titleDetail2{
+    font-family: 'Rubik', sans-serif;
+}
+
+.textJustify{
+    text-align: justify;
+}

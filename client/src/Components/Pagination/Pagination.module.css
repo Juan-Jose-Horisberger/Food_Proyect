@@ -1,0 +1,23 @@
+.pagination{
+    background-color: #131416;
+    height: 60px;
+    background-color: #6C757D;
+}
+
+.buttonsPagination{
+    width: 60px;
+    border-radius: 5px;
+    border: none;
+    text-decoration: none;
+    font-family: 'Rubik', sans-serif;
+}
+.buttonsPagination:hover{
+    cursor: pointer;
+    background-color: #6C757D;
+}
+
+
+.listPagination{
+    margin: 0 !important;
+    padding: 0 !important;
+}

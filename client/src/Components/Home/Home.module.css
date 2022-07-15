@@ -1,3 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+/*font-family: 'Rubik', sans-serif;*/
+
+/* .backgroundImage{
+    width: 100%;
+    height: auto;
+    background-image: url(https://png.pngtree.com/background/20210711/original/pngtree-seamless-monochrome-pattern-fastfood-picture-image_1162847.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+} */
+
 .navegation{
-    border: 1px solid red;
+    font-family: 'Rubik', sans-serif;
+    cursor: pointer;
+    font-size: 18px;
 }
+
+.filters{
+    margin-top: 100px;
+}
+
+.filtersTitle{
+    font-family: 'Rubik', sans-serif;
+    font-size: 34px;
+}
+
+.selects{
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-family: 'Rubik', sans-serif;
+}
+
+.selects option{
+    font-family: 'Rubik', sans-serif;
+}
+
+.selects:hover{
+    cursor: pointer;
+    background-color: #6C757D;
+}
+
+.Loading{
+    margin-top: 250px;
+}
+
+.containerRecipes{
+    background-color: #dfdfdfde;
+
+}
+
+.containerRecipes:hover{
+    box-shadow: 0px 0px 10px black;
+}
+/*font-family: 'Rubik', sans-serif;*/

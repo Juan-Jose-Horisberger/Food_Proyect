@@ -19,15 +19,16 @@ export default function SearchBar() {
     }
 
     return (
-        <div>
-            <form onSubmit={(e) => handleSubmit(e)}>
+        <div className='col'>
+            <form onSubmit={(e) => handleSubmit(e)} className="d-flex">
                 <input
                     type="text"
                     value={name}
                     placeholder='Search...'
                     onChange={(e) => handleInputChange(e)}
+                    className="form-control me-2"
                 />
-                <button type='submit'>Search</button>
+                <button className="btn btn-outline-success" type='submit'>Search</button>
             </form>
         </div>
     )
