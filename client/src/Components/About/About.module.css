@@ -1,0 +1,170 @@
+.containerAll{
+    width: 100%;
+    margin: 30px 0px;
+    padding: 20px 0px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container{
+    width: 70%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(184, 176, 176);
+    border-radius: 10px;
+}
+
+.containerAboutMe{
+    width: 80%;
+    
+    text-align: start;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    background-color: rgb(94, 93, 93);
+}
+.containerAboutMe h1{
+    width: 50%;
+    
+    box-sizing: border-box;
+    padding-left: 30px;
+    font-family: 'Readex Pro', sans-serif;
+}
+
+.containerAboutMe p{ 
+    font-family: 'Readex Pro', sans-serif;
+}
+
+.containerAboutMe div{
+    width: 49%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.containerAboutMe div button{
+    padding: 8px 17px;
+    border-radius: 5px;
+    font-size: 15px;
+    border: none;
+    font-family: 'Readex Pro', sans-serif;
+}
+
+
+.containerAboutMe div button:hover{
+    cursor: pointer;
+    box-shadow: 0 0 15px white;
+    background-color: #959288;
+}
+
+
+.containerInfoProyect{
+    width: 80%;
+    padding: 10px;
+    text-align: start;
+    
+    background-color: rgb(94, 93, 93);
+    margin-bottom: 10px;
+}
+
+.containerInfoProyect h2 {
+    
+    box-sizing: border-box;
+    padding-left: 30px;
+    font-family: 'Readex Pro', sans-serif;
+}
+
+.containerInfoProyect p {
+    font-family: 'Readex Pro', sans-serif;
+}
+
+
+
+.containerContactInfo{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    background-color: rgb(94, 93, 93);
+}
+
+.containerContactInfo h3{
+    font-family: 'Readex Pro', sans-serif;
+}
+
+.containerContactInfo ul {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    
+    text-decoration: none;
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+}
+
+.containerContactInfo ul li {
+    width: 30px;
+    height: auto;
+    text-decoration: none;
+    transition: 0.5s ease all;
+}
+
+.containerContactInfo ul li a img{
+    transition: 0.6s ease all;
+}
+
+.containerContactInfo ul li a img:hover {
+    cursor: pointer;
+    box-shadow: 0 0 10px white;
+}
+
+
+
+
+@media screen and(max-width: 576px) {
+    .containerAboutMe{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .containerAboutMe{
+        display: flex;
+        justify-content: space-between;
+    }
+    .containerAboutMe h1{
+        width: 50%;
+        min-width: 120px;
+        font-size: 25px;
+        padding: 0;
+        margin-right: 10px;
+    }
+    .containerAboutMe div {
+        width: 90px;
+    }
+    
+    .containerInfoProyect h2 {
+        font-size: 18px;
+        padding: 0;        
+    }
+    
+    .containerContactInfo{
+        width: 86%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    }
+}

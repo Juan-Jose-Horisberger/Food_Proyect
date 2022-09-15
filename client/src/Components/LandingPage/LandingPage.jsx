@@ -13,7 +13,7 @@ export default function LandingPage() {
                 <h1>Welcome to FOODLY</h1>
                 <p>Where you will find the best recipes that fit your needs</p>
                 <Link to='/home'>
-                    <button type="button" class="btn btn-outline-secondary">Discover</button>
+                    <button type="button" className="btn btn-outline-secondary">Discover</button>
                 </Link>
                 <p>Developed by Juan Jose Horisberger</p>
             </div>

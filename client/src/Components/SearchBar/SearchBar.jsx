@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getRecipesByName } from '../../Actions';
+import { getRecipesByName, setToTrue } from '../../Actions';
 
-export default function SearchBar() {
+export default function SearchBar({ setCurrentPage }) {
 
     const dispatch = useDispatch();
 
     const [name, setName] = useState("");
 
-    function handleInputChange(e){
+    function handleInputChange(e) {
         setName(e.target.value);
     }
 
-    function handleSubmit(e){
+    function handleSubmit(e) {
         e.preventDefault(e);
         dispatch(getRecipesByName(name));
+        dispatch(setToTrue());
+        setCurrentPage(1);
         setName('');
     }
 

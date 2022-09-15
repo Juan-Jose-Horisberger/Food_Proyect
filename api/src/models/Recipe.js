@@ -4,6 +4,12 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('recipe', {
+    // id: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    //   primaryKey: true
+    // },
+
     id: {
       // type: DataTypes.INTEGER,
       type: DataTypes.UUID,
@@ -16,18 +22,17 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     summary: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false
     },
     healthScore: {
       type: DataTypes.INTEGER,
-      // validate: {
-      //   min: 1,
-      //   max: 100
-      // },
-      // defaultValue: 1
     },
-    steps: {
+    // analyzedInstructions: { //lo cambio el anterior abajo
+    //   type: DataTypes.TEXT,
+    //   defaultValue: null
+    // },
+    analyzedInstructions: {
       type: DataTypes.ARRAY(DataTypes.TEXT),
       defaultValue: null
     },
@@ -35,9 +40,15 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING, //Cambiamos STRING por text, ya que STRING espera como max 255 caracteres
       defaultValue: 'https://assets.unileversolutions.com/recipes-v2/109064.jpg',
     },
+    dietsApi: { //esto es nuevo, le cambiamos a dietsApi, sino colision de nombres con diets.
+      type: DataTypes.ARRAY(DataTypes.TEXT),
+      defaultValue: null
+    },
     createdInBd: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     }
   });
+
+
 }

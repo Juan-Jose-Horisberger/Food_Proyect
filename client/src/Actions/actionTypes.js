@@ -7,3 +7,4 @@ export const FILTER_CREATED = "FILTER_CREATED";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_HEALTH_SCORE = "ORDER_BY_HEALTH_SCORE";
 export const POST_RECIPE = "POST_RECIPE";
+export const SET_TO_TRUE = "SET_TO_TRUE";

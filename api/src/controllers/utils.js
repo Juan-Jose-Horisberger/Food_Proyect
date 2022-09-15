@@ -1,0 +1,86 @@
+const axios = require("axios");
+const { Recipe, Diet } = require('../db.js'); //Models
+require('dotenv').config();
+const { YOUR_API_KEY } = process.env;
+
+const dbLoader = async () => {
+    try {
+        const api = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${YOUR_API_KEY}&addRecipeInformation=true&number=100`);
+
+        if (api) {
+            const apiInfo = api.data.results?.map(e => {
+                return {
+                    //id: e.id, //Quitar este id ya que lo generamos solo desde el db
+                    name: e.title,
+                    summary: e.summary.replace(/<[^>]*>?/gm, ""),
+                    healthScore: e.healthScore,
+                    analyzedInstructions: e.analyzedInstructions
+                        ? e.analyzedInstructions.map(a => a.steps.map((b, i) => `${i + 1}. ${b.step}.`)).flat()
+                        : "",
+                    image: e.image,
+                    dietsApi: e.diets
+                }
+            })
+
+            const allInfo = Recipe.findAll({ include: Diet })
+            if (!allInfo.length) {
+                for (let i = 0; i < apiInfo.length; i++) {
+                    await Recipe.create(apiInfo[i])
+                }
+            }
+
+            // return apiInfo
+        }
+    }
+    catch (e) {
+        console.log(e);
+    }
+}
+
+const getOneRecipe = async (id) => {
+    try {
+        if (id) {
+            const recipe = await Recipe.findByPk(id, { include: Diet });
+            return recipe;
+        }
+    }
+    catch (e) {
+        console.log(e)
+    }
+}
+
+const getOrderedRecipes = async (order) => {
+    try {
+        // return order;
+        if (order) {
+            const allInfo = await Recipe.findAll({ include: Diet });
+
+            if (order === 'asc') {
+                allInfo.sort(function (a, b) {
+                    if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+                    if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+                    return 0;
+                })
+                return allInfo;
+            }
+            else if (order === 'desc') {
+                allInfo.sort(function (a, b) {
+                    if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
+                    if (a.name.toLowerCase() < b.name.toLowerCase()) return 1;
+                    return 0;
+                })
+                return allInfo;
+            }
+        }
+    }
+    catch (e) {
+        console.log(e)
+    }
+}
+
+
+module.exports = {
+    dbLoader,
+    getOneRecipe,
+    getOrderedRecipes
+}

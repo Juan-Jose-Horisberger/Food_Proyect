@@ -39,6 +39,8 @@ export default function Home() {
 
     const [loaded, setLoaded] = useState(false);
 
+    const [disabled, setDisabled] = useState(false);
+
     const paginado = (pageNumber) => { //Nos va a ayudar a renderizar
         setCurrentPage(pageNumber);
     }
@@ -62,7 +64,7 @@ export default function Home() {
     }, [])
 
     useEffect(() => {
-        window.scrollTo(0, 0);
+        // window.scrollTo(0, 0);
     }, [currentPage]);
 
     function handleClick(e) {
@@ -86,14 +88,18 @@ export default function Home() {
 
     function handleSortName(e) {
         e.preventDefault();
-        dispatch(orderByName(e.target.value));
+        if (e.target.value !== "Order by name") {
+            dispatch(orderByName(e.target.value));
+        }
         setCurrentPage(1);
         setOrder(`${e.target.value} order`);
     }
 
     function handleSortHealthScore(e) {
         e.preventDefault();
-        dispatch(orderByHealthScore(e.target.value));
+        if (e.target.value !== "Order by health score") {
+            dispatch(orderByHealthScore(e.target.value));
+        }
         setCurrentPage(1);
         setOrder(`${e.target.value} order`); // Modificamos el estado order, para que se vuelva a renderizar mi componente
     }
@@ -121,7 +127,9 @@ export default function Home() {
                                     <p className={`nav-link mb-0 text-start text-sm-center ${styles.navegation}`}>Create recipe</p>
                                 </Link>
                             </ul>
-                            <SearchBar />
+                            <SearchBar
+                                setCurrentPage={setCurrentPage}
+                            />
                         </div>
                     </div>
                 </nav>
@@ -133,10 +141,10 @@ export default function Home() {
             {
                 loaded ? (
                     <div className={`${styles.filters}`}>
-                        <div className={`container-fluid mb-5`}>
+                        <div className={`container-fluid col-11 mb-3`}>
                             <h3 className={`${styles.filtersTitle}`}>Filters</h3>
                             <div className={`row d-flex justify-content-center`}>
-                                <select onChange={(e) => handleFilterType(e)} className={`col-2 mx-3 ${styles.selects}`}>
+                                <select onChange={(e) => handleFilterType(e)} className={`col-md-2 mx-3 mb-2 ${styles.selects}`}>
                                     <option value="All">All</option>
                                     {
                                         allDiets.map((type) => {
@@ -148,17 +156,17 @@ export default function Home() {
                                         })
                                     }
                                 </select>
-                                <select onChange={(e) => handleSortName(e)} className={`col-2 mx-3 ${styles.selects}`}>
+                                <select onChange={(e) => handleSortName(e)} className={`col-md-2 mx-3 mb-2  ${styles.selects}`}>
                                     <option>Order by name</option>
                                     <option value='asc'>A-Z</option>
                                     <option value='desc'>Z-A</option>
                                 </select>
-                                <select onChange={(e) => handleSortHealthScore(e)} className={`col-2 mx-3 ${styles.selects}`}>
+                                <select onChange={(e) => handleSortHealthScore(e)} className={`col-md-2 mx-3 mb-2  ${styles.selects}`}>
                                     <option>Order by health score</option>
                                     <option value='asc'>Min-Max</option>
                                     <option value='desc'>Max-Min</option>
                                 </select>
-                                <select onChange={(e) => handleFilterCreated(e)} className={`col-2 mx-3 ${styles.selects}`}>
+                                <select onChange={(e) => handleFilterCreated(e)} className={`col-md-2 mx-3 mb-2  ${styles.selects}`}>
                                     <option value='all'>All</option>
                                     <option value='api'>Existing</option>
                                     <option value='created'>Created</option>
@@ -193,10 +201,23 @@ export default function Home() {
                             recipesPerPage={recipesPerPage}
                             allRecipes={allRecipes.length}
                             paginado={paginado}
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
                         />
                     </div>
                 ) : (
-                    <p className={`${styles.Loading}`}>Loading...</p>
+                    <div
+                        className={`d-flex justify-content-center flex-column ${styles.container_loading}`}
+                    >
+                        <p>Cargando...</p>
+                        <div
+                            className={`spinner-border ${styles.loading}`}
+                            style={{ width: "4rem", height: "4rem" }}
+                            role="status"
+                        >
+                            <span className="visually-hidden"></span>
+                        </div>
+                    </div>
                 )
             }
         </div>

@@ -9,46 +9,63 @@
     background-size: contain;
 } */
 
-.navegation{
+.navegation {
     font-family: 'Rubik', sans-serif;
     cursor: pointer;
     font-size: 18px;
 }
 
-.filters{
+.filters {
     margin-top: 100px;
 }
 
-.filtersTitle{
+.filtersTitle {
     font-family: 'Rubik', sans-serif;
     font-size: 34px;
 }
 
-.selects{
+.selects {
     padding: 8px 10px;
     border-radius: 10px;
     font-family: 'Rubik', sans-serif;
 }
 
-.selects option{
+.selects option {
     font-family: 'Rubik', sans-serif;
 }
 
-.selects:hover{
+.selects:hover {
     cursor: pointer;
     background-color: #6C757D;
 }
 
-.Loading{
+.Loading {
     margin-top: 250px;
 }
 
-.containerRecipes{
+.containerRecipes {
     background-color: #dfdfdfde;
 
 }
 
-.containerRecipes:hover{
+.containerRecipes:hover {
     box-shadow: 0px 0px 10px black;
 }
+
+.container_loading {
+    height: 600px;
+    align-items: center;
+    margin-bottom: 175px;
+}
+
+.container_loading p {
+    font-size: 40px;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 15px;
+    flex-direction: column !important;
+    color: rgb(66, 66, 66);
+
+}
+
 /*font-family: 'Rubik', sans-serif;*/

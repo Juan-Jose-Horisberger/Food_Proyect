@@ -1,9 +1,20 @@
 import axios from 'axios';
-import { GET_RECIPES, GET_DIETS, RECIPE_BY_NAME, RECIPE_BY_ID, FILTER_BY_TYPE, FILTER_CREATED, ORDER_BY_NAME, ORDER_BY_HEALTH_SCORE } from './actionTypes';
+import {
+    GET_RECIPES,
+    GET_DIETS,
+    RECIPE_BY_NAME,
+    RECIPE_BY_ID,
+    FILTER_BY_TYPE,
+    FILTER_CREATED,
+    ORDER_BY_NAME,
+    ORDER_BY_HEALTH_SCORE,
+    SET_TO_TRUE
+} from './actionTypes';
 
+// ~~~~~~~~~~~~~~~~~GETS~~~~~~~~~~~~~~~~~
 export function getRecipes() {
     return async function (dispatch) {
-        let recipes = await axios.get("http://localhost:3001/recipes");
+        let recipes = await axios.get("/recipes");
         return dispatch({
             type: GET_RECIPES,
             payload: recipes.data,
@@ -14,7 +25,7 @@ export function getRecipes() {
 export function getRecipesByName(recipe) {
     return async function (dispatch) {
         try {
-            let recipesByName = await axios.get(`http://localhost:3001/recipes?name=${recipe}`);
+            let recipesByName = await axios.get(`/recipes?name=${recipe}`);
             console.log(recipesByName.data);
             return dispatch({
                 type: RECIPE_BY_NAME,
@@ -28,10 +39,9 @@ export function getRecipesByName(recipe) {
     }
 }
 
-
 export function getDiets() {
     return async function (dispatch) {
-        let diets = await axios.get("http://localhost:3001/diets");
+        let diets = await axios.get("/diets");
         return dispatch({
             type: GET_DIETS,
             payload: diets.data,
@@ -39,17 +49,9 @@ export function getDiets() {
     };
 }
 
-export function postRecipes(data) {
-    return async function (dispatch) {
-        console.log(data);
-        let newRecipe = await axios.post(`http://localhost:3001/recipes/create`, data);
-        return newRecipe;
-    }
-}
-
 export function getRecipeDetail(id) {
     return async function (dispatch) {
-        let recipeDetail = await axios.get(`http://localhost:3001/recipes/${id}`);
+        let recipeDetail = await axios.get(`/recipes/${id}`);
         return dispatch({
             type: RECIPE_BY_ID,
             payload: recipeDetail.data
@@ -57,7 +59,15 @@ export function getRecipeDetail(id) {
     }
 }
 
-// <---FILTERS AND ORDER--->
+// ~~~~~~~~~~~~~~~~~POST~~~~~~~~~~~~~~~~~
+export function postRecipes(data) {
+    return async function (dispatch) {
+        let newRecipe = await axios.post(`/recipes/create`, data);
+        return newRecipe;
+    }
+}
+
+// ~~~~~~~~~~~~~~~~~FILTERS~~~~~~~~~~~~~~~~~
 export function filterRecipesByType(payload) {
     return {
         type: FILTER_BY_TYPE,
@@ -71,6 +81,8 @@ export function filterRecipesCreated(payload) {
         payload
     }
 }
+
+// ~~~~~~~~~~~~~~~~~ORDERS~~~~~~~~~~~~~~~~~
 
 export function orderByName(order) {
     console.log(order);
@@ -87,5 +99,11 @@ export function orderByHealthScore(payload) {
     return {
         type: ORDER_BY_HEALTH_SCORE,
         payload
+    }
+}
+
+export function setToTrue() {
+    return {
+        type: SET_TO_TRUE
     }
 }

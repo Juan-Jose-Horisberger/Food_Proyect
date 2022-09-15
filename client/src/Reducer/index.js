@@ -1,11 +1,23 @@
 //importaciones de tipos de acciones a concretar
-import { GET_RECIPES, GET_DIETS, RECIPE_BY_NAME, RECIPE_BY_ID, FILTER_BY_TYPE, FILTER_CREATED, ORDER_BY_NAME, ORDER_BY_HEALTH_SCORE, POST_RECIPE } from '../Actions/actionTypes';
+import {
+    GET_RECIPES,
+    GET_DIETS,
+    RECIPE_BY_NAME,
+    RECIPE_BY_ID,
+    FILTER_BY_TYPE,
+    FILTER_CREATED,
+    ORDER_BY_NAME,
+    ORDER_BY_HEALTH_SCORE,
+    POST_RECIPE,
+    SET_TO_TRUE
+} from '../Actions/actionTypes';
 
 const initialState = {
     recipes: [],
     diets: [],
     allRecipes: [],
     recipeDetail: [],
+    boolean: false,
 };
 
 
@@ -27,23 +39,23 @@ const rootReducer = (state = initialState, { type, payload }) => { //51:40
             }
         case FILTER_BY_TYPE: //Filtrado por tipo de dieta desde el front
             const allRecipes = state.allRecipes;  //Almacenamos las recetas en una constante
-
+            // console.log(allRecipes)
             const recipesFiltered = payload === 'All'
                 ? allRecipes
                 : allRecipes.filter((recipe) => {
                     let check = false;
-                    if (recipe.diets) {
-                        recipe.diets.forEach((el) => {
-                            if (recipe.createdInBd) {
-                                if (el.name.toLowerCase().includes(payload.toLowerCase())) {
-                                    check = true;
-                                }
-                            } else {
-                                if (el.toLowerCase().includes(payload.toLowerCase())) {
-                                    check = true;
-                                }
+                    if (recipe.dietsApi) {
+                        recipe.dietsApi.forEach((d) => {
+                            if (d.toLowerCase().includes(payload.toLowerCase())) {
+                                check = true;
                             }
-
+                        });
+                    }
+                    else if (recipe.diets) {
+                        recipe.diets.forEach((el) => {
+                            if (el.name.toLowerCase().includes(payload.toLowerCase())) {
+                                check = true;
+                            }
                         });
                     }
                     return check;
@@ -53,6 +65,7 @@ const rootReducer = (state = initialState, { type, payload }) => { //51:40
                 recipes: recipesFiltered, //Lo que filtramos, queremos cambiar el estado global recipes
             }
         case FILTER_CREATED:
+            console.log(state.allRecipes)
             const allRecipesCopied = state.allRecipes;
             const createdFilter = payload === 'created'
                 ? allRecipesCopied.filter(r => r.createdInBd)
@@ -99,6 +112,11 @@ const rootReducer = (state = initialState, { type, payload }) => { //51:40
             return {
                 ...state,
             };
+        case SET_TO_TRUE:
+            return {
+                ...state,
+                boolean: true
+            }
         default:
             return { ...state }
     }

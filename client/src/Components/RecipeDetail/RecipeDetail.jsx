@@ -18,13 +18,14 @@ export default function RecipeDetail() {
 
     return (
         <div className='container d-flex justify-content-center'>
+            {console.log(recipeDetail)}
             {loaded ? (
                 <div className='row col-9 bg-light my-5'>
-                    <div className='row p-4'>
-                        <div className={`col-12 col-md-6`}>
+                    <div className='row p-4 d-flex flex-column-reverse align-items-center flex-sm-row'>
+                        <div className={`col-10 col-sm-10 d-flex justify-content-center justify-content-sm-start pr-5`}>
                             <h1 className={`${styles.titleDetail} fs-md-4`}>{recipeDetail[0].name}</h1>
                         </div>
-                        <div className='col-12 col-md-6 d-flex justify-content-center align-items-center'>
+                        <div className='col-2 col-md-2 d-flex justify-content-center align-items-center align-self-end align-self-sm-start pb-2'>
                             <Link to='/home'>
                                 <button className={`btn btn-outline-success`}>Home</button>
                             </Link>
@@ -38,29 +39,37 @@ export default function RecipeDetail() {
                             <p className={`text-start fs-5 pt-2 ${styles.titleDetail2}`}>Health Score: {recipeDetail[0].healthScore}</p>
                             <h3 className={`text-start ${styles.titleDetail2}`}>Diets:</h3>
                             <ul className={`navbar-nav ${styles.textJustify}`}>
-                                {recipeDetail[0].diets?.map((d, i) =>
-                                    <li key={i} className={`col-12 m-0 p-0 text-capitalize text-justify`}>
-                                        {recipeDetail[0].createdInBd ? `${i + 1}. ${d.name}` : `${i + 1}. ${d}`}
-                                    </li>
-                                )}
+                                {/* {console.log(recipeDetail)} */}
+                                {
+                                    recipeDetail[0].dietsApi !== null //
+                                        ?
+                                        recipeDetail[0].dietsApi.map((d, i) =>
+                                            <li key={i} className={`col-12 m-0 p-0 text-capitalize text-justify`}>
+                                                {`${i + 1}. ${d}`}
+                                            </li>
+                                        )
+                                        : recipeDetail[0].diets.map((d, i) =>
+                                            <li key={i} className={`col-12 m-0 p-0 text-capitalize text-justify`}>
+                                                {`${i + 1}. ${d.name}`}
+                                            </li>
+                                        )
+                                }
                             </ul>
                         </div>
                     </div>
                     <div className='bg-secondary'>
                         <h3 className='text-start ps-3'>Description</h3>
-                        <p className={`${styles.textJustify}`}>{recipeDetail[0].summary}</p>
+                        {/* <p className={`${styles.textJustify}`}>{recipeDetail[0].summary}</p> */}
                     </div>
                     <div className='mt-3'>
                         <h3 className='text-start ps-3'>Steps</h3>
                         <ul className={`${styles.textJustify}`}>
                             {
-                                recipeDetail[0].createdInBd
-                                    ? recipeDetail[0].steps?.map((s, i) =>
-                                        <li key={i}>{i + 1}. {s}</li>
-                                    )
-                                    : recipeDetail[0].analyzedInstructions[0]?.map((s, i) =>
-                                        <li key={i}>{i + 1}. {s}</li>
-                                    )
+                                recipeDetail[0].analyzedInstructions.length
+                                    ? recipeDetail[0].analyzedInstructions?.map((s, i) =>
+                                        <li key={i}>{s}</li>
+                                        )
+                                    : <li>There are no steps in this recipe...</li>
                             }
                         </ul>
                     </div>
