@@ -37,7 +37,7 @@ conn.sync({ force: false }).then(async () => {
         return {
           name: d.toLowerCase(),
         };
-      });
+      })
 
       let database = await Diet.bulkCreate(formatted); //Insert info in bd
       dbLoader();
