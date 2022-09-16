@@ -30,7 +30,7 @@ const dbLoader = async () => {
         //     }
         // }
 
-        const recipes = await axios(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${YOUR_API_KEY}&addRecipeInformation=true&number=70`);
+        const recipes = await axios(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${YOUR_API_KEY}&addRecipeInformation=true&number=100`);
 
         // formatea todas los elem filtrados de la api
         const recipesApi = recipes.data.results.map(result => {

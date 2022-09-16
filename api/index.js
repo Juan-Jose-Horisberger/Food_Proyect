@@ -21,40 +21,12 @@ const server = require('./src/app.js');
 //const { getAllDietsTypes } = require('./src/controllers/Diets.controller.js');
 const { conn, Diet, Recipe } = require('./src/db.js');
 const { dbLoader, dbLoaderDiets } = require('./src/controllers/utils');
-const diets_List = require('./src/controllers/Diets_list');
+// const diets_List = require('./src/controllers/Diets_list');
 
 // Syncing all the models at once.
 conn.sync({ force: false }).then(() => {
-
-  //Precarga de base de datos
-
-  // try {
-  //   const bd = await Diet.findAll();
-  //   const allInfo = await Recipe.findAll() //{ include: Diet }
-
-  //   if (!bd.length && !allInfo.length) {
-  //     let formatted = diets_List.map((d) => {
-  //       return {
-  //         name: d.toLowerCase(),
-  //       };
-  //     })
-
-  //     dbLoader();
-  //     let database = await Diet.bulkCreate(formatted); //Insert info in bd
-
-  //     server.listen(process.env.PORT, () => {
-  //       console.log("%s listening at 3001 :)"); // eslint-disable-line no-console
-  //     });
-  //   }
-  //   else {
-  //     server.listen(process.env.PORT, () => {
-  //       console.log("%s listening at 3001"); // eslint-disable-line no-console
-  //     });
-  //   }
-  // } catch (err) { console.error(err) }
-
-  dbLoader();
   dbLoaderDiets();
+  dbLoader();
 
   server.listen(process.env.PORT, () => {
     console.log("%s listening at 3001"); // eslint-disable-line no-console
