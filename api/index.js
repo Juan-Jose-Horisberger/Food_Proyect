@@ -39,8 +39,8 @@ conn.sync({ force: true }).then(async () => {
         };
       })
 
+      await dbLoader();
       let database = await Diet.bulkCreate(formatted); //Insert info in bd
-      dbLoader();
 
       server.listen(process.env.PORT, () => {
         console.log("%s listening at 3001 :)"); // eslint-disable-line no-console
