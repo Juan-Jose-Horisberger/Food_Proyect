@@ -37,6 +37,39 @@ const dbLoader = async () => {
     }
 }
 
+function dbLoaderDiets() {
+
+    axios(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${YOUR_API_KEY}&addRecipeInformation=true&number=100`)
+        .then(result => {
+
+            let unique = [];
+
+            result.data.results.forEach(data => {
+
+                data.diets.forEach(element => {
+
+                    unique.push(element);
+                })
+            })
+            unique = new Set(unique);
+
+            /* la formateo c/e en un obj */
+            let diets = [...unique].map(diet => {
+                return { name: diet }
+            });
+
+            // almaceno en la db los tipos de dieta que no existan (sin duplicarlos)
+            Diet.bulkCreate(diets, {
+                ignoreDuplicates: true
+            });
+
+            console.log("Diets preloaded!");
+        })
+        .catch(error => {
+            console.log(error.message);
+        });
+}
+
 const getOneRecipe = async (id) => {
     try {
         if (id) {
@@ -82,5 +115,6 @@ const getOrderedRecipes = async (order) => {
 module.exports = {
     dbLoader,
     getOneRecipe,
-    getOrderedRecipes
+    getOrderedRecipes,
+    dbLoaderDiets
 }

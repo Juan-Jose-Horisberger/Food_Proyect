@@ -17,19 +17,18 @@ const getAllInfo = async (req, res, next) => {
         const { name } = req.query;
 
         const allTheRecipes = await Recipe.findAll({ include: Diet });
-        allTheRecipes.length && res.send(allTheRecipes)
-        // if (name) {
-        //     const newName = name.substr(-1) === 's' ? name.substr(0, name.length - 1) : name;
-        //     const recipes = allTheRecipes?.filter(e => (
-        //         e.name.toLowerCase().includes(newName.toLowerCase())
-        //     ));
-        //     recipes.length
-        //         ? res.send(recipes)
-        //         : res.status(400).json({ messaje: 'Error that recipe does not exist' });
-        // }
-        // else if (allTheRecipes.length) {
-        //     res.send(allTheRecipes)
-        // }
+        if (name) {
+            const newName = name.substr(-1) === 's' ? name.substr(0, name.length - 1) : name;
+            const recipes = allTheRecipes?.filter(e => (
+                e.name.toLowerCase().includes(newName.toLowerCase())
+            ));
+            recipes.length
+                ? res.send(recipes)
+                : res.status(400).json({ messaje: 'Error that recipe does not exist' });
+        }
+        else if (allTheRecipes.length) {
+            res.send(allTheRecipes)
+        }
     }
     catch (e) {
         next(e);
