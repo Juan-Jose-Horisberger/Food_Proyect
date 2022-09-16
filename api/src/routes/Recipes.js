@@ -20,16 +20,17 @@ router.get("/", async (req, res) => {
         // si tengo query filtro sobre ella
         if (name) {
             recipesDB = await Recipe.findAll({ where: { name: { [Op.iLike]: `%${name}%` } }, include: [{ model: Diet }] });
-            recipesDB.length && res.send(recipesDB)
-        } else if (!name) {
+        } else {
             recipesDB = await Recipe.findAll({ include: [{ model: Diet }] });
-            recipesDB.length && res.send(recipesDB)
-        }
-        else {
-            res.status(404).send({ error: "Recipe not found!" });
         }
 
-        // return res.status(200).send(recipesDB);
+        if (!recipesDB.length) {
+            return res.status(404).send({ error: "Recipe not found!" });
+        }
+        else {
+            return res.status(200).send(recipesDB);
+        }
+
 
     } catch (error) {
         return res.status(400).send({ error: error.message });
