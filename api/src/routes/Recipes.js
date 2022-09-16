@@ -25,10 +25,10 @@ router.get("/", async (req, res) => {
         }
 
         if (recipesDB.length) {
-            return res.status(200).send(recipesDB);
+            res.status(200).send(recipesDB);
         }
         else {
-            return res.status(404).send({ error: "Recipe not found!" });
+            res.status(200).send(recipesDB);
         }
 
 
