@@ -18,18 +18,33 @@ router.get("/", async (req, res) => {
         let recipesDB;
 
         // si tengo query filtro sobre ella
+        // if (name) {
+        //     recipesDB = await Recipe.findAll({ where: { name: { [Op.iLike]: `%${name}%` } }, include: [{ model: Diet }] });
+        // } else {
+        //     recipesDB = await Recipe.findAll({ include: [{ model: Diet }] });
+        // }
+
+        // if (recipesDB.length) {
+        //     res.status(200).send(recipesDB);
+        // }
+        // else {
+        //     res.status(200).send(recipesDB);
+        // }
+
+
+        const { name } = req.query;
+
+        const allTheRecipes = await Recipe.findAll({ include: Diet });
         if (name) {
-            recipesDB = await Recipe.findAll({ where: { name: { [Op.iLike]: `%${name}%` } }, include: [{ model: Diet }] });
-        } else {
-            recipesDB = await Recipe.findAll({ include: [{ model: Diet }] });
+            const recipes = await Recipe.findAll({ where: { name: { [Op.iLike]: `%${name}%` } }, include: [{ model: Diet }] });
+            recipes.length
+                ? res.send(recipes)
+                : res.status(400).json({ messaje: 'Error that recipe does not exist' });
+        }
+        else if (allTheRecipes.length) {
+            res.send(allTheRecipes)
         }
 
-        if (recipesDB.length) {
-            res.status(200).send(recipesDB);
-        }
-        else {
-            res.status(200).send(recipesDB);
-        }
 
 
     } catch (error) {
