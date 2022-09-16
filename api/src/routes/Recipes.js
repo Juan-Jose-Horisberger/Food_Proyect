@@ -27,8 +27,7 @@ router.get("/", async (req, res) => {
         if (!recipesDB.length) {
             recipesDB = await Recipe.findAll({ where: { name: { [Op.iLike]: `%${name}%` } }, include: [{ model: Diet }] });
         }
-
-        return res.status(200).send(recipesDB);
+        recipesDB.length && res.status(200).send(recipesDB);
 
     } catch (error) {
         return res.status(400).send({ error: error.message });
