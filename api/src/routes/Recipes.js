@@ -8,31 +8,31 @@ const { getAllInfo, recipeById, addInfo, orderByName } = require('../controllers
 
 // GET
 
-// router.get('/', getAllInfo);
+router.get('/', getAllInfo);
 
-router.get("/", async (req, res) => {
+// router.get("/", async (req, res) => {
 
-    const { name } = req.query;
+//     const { name } = req.query;
 
-    try {
-        let recipesDB;
+//     try {
+//         let recipesDB;
 
-        // si tengo query filtro sobre ella
-        if (name) {
-            recipesDB = await Recipe.findAll({ where: { name: { [Op.iLike]: `%${name}%` } }, include: [{ model: Diet }] });
-        } else {
-            recipesDB = await Recipe.findAll({ include: [{ model: Diet }] });
-        }
+//         // si tengo query filtro sobre ella
+//         if (name) {
+//             recipesDB = await Recipe.findAll({ where: { name: { [Op.iLike]: `%${name}%` } }, include: [{ model: Diet }] });
+//         } else {
+//             recipesDB = await Recipe.findAll({ include: [{ model: Diet }] });
+//         }
 
-        if (!recipesDB.length) {
-            recipesDB = await Recipe.findAll({ where: { name: { [Op.iLike]: `%${name}%` } }, include: [{ model: Diet }] });
-        }
-        recipesDB.length && res.status(200).send(recipesDB);
+//         if (!recipesDB.length) {
+//             recipesDB = await Recipe.findAll({ where: { name: { [Op.iLike]: `%${name}%` } }, include: [{ model: Diet }] });
+//         }
+//         recipesDB.length && res.status(200).send(recipesDB);
 
-    } catch (error) {
-        return res.status(400).send({ error: error.message });
-    }
-});
+//     } catch (error) {
+//         return res.status(400).send({ error: error.message });
+//     }
+// });
 
 
 router.get('/:id', recipeById);
