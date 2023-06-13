@@ -5,16 +5,22 @@ body {
     line-height: 1.4rem;
 }
 
+
 .containerRecipeCreate {
     width: 100%;
     height: auto;
-    /* display: flex; */
-    overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-image: url(../../Imagenes/backgroundImage.jpg);
 }
 
 .containerForm {
-    z-index: 1;
-    position: absolute;
+    /* z-index: 1; */
+    /* position: absolute; */
     /* background-color: #492f21; */
     background-color: rgba(90, 88, 87, 0.7);
     /* opacity: 0.8; */
@@ -83,7 +89,7 @@ body {
 
 @media screen and (min-width: 50px) {
     .display {
-        display: none; 
+        display: none;
     }
 }
 

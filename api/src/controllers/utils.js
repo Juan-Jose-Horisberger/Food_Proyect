@@ -37,7 +37,7 @@ const dbLoader = async () => {
 
             // formateo en un obj lo necesario
             const recipeFormat = {
-                id: result.id,
+                // id: result.id,
                 name: result.title,
                 summary: result.summary?.replace(/<\/?[^>]+(>|$)/g, ""),
                 healthScore: result.healthScore,
@@ -68,7 +68,7 @@ const dbLoader = async () => {
                     image: api.image
                 });
 
-                for (let j = 0; j < api.diets.length; j++) {
+                for (let j = 0; j < api.diets?.length; j++) {
                     const diet = api.diets[j]; // nombre de dieta
                     const findDiet = await Diet.findOne({ where: { name: diet } }); // busco en la db
 
@@ -114,7 +114,7 @@ function dbLoaderDiets() {
 
             // almaceno en la db los tipos de dieta que no existan (sin duplicarlos)
             Diet.bulkCreate(diets, {
-                ignoreDuplicates: true
+                ignoreDuplicates: false
             });
 
             console.log("Diets preloaded!");
