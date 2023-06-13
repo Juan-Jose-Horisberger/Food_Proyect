@@ -7,6 +7,7 @@ import { getRecipes, getDiets, filterRecipesByType, filterRecipesCreated, orderB
 import Recipe from '../Recipe/Recipe';
 import Pagination from '../Pagination/Pagination';
 import styles from './Home.module.css';
+import imgIcon from '../../Imagenes/food-restaurant.png';
 // import image1 from '../../Imagenes/pexels-alesia-kozik-6546024.jpg'
 // import image2 from '../../Imagenes/pexels-alesia-kozik-6546033.jpg'
 // import image3 from '../../Imagenes/pexels-polina-kovaleva-5645161.jpg'
@@ -109,8 +110,11 @@ export default function Home() {
             <div className={`row`}> {/* style={{border: '1px solid red'}}*/} {/*className={`row ${styles.navegation}*/}
                 <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
                     <div className="container-fluid">
-                        <Link to='/' className="navbar-brand d-flex">
-                            <h1>FOODLY</h1>
+                        <Link to='/' className="navbar-brand d-flex align-items-center">
+                            <div style={{ width: "55px" }} className='d-flex'>
+                                <img src={imgIcon} className='img-fluid' />
+                            </div>
+                            <h1 className='ps-1'>FOODLY</h1>
                         </Link>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
